@@ -58,8 +58,8 @@ public class ChamadoController {
 
     // Listar por status
     @GetMapping("/chamados/status") // /chamados/status?batata=ATRIBUIDO
-    public List<Chamado> listarPorStatus(@RequestParam StatusChamado batata) {
-        return this.chamadoService.listarPorStatus(batata);
+    public List<Chamado> listarPorStatus(@RequestParam StatusChamado status) {
+        return this.chamadoService.listarPorStatus(status);
     }
 
     // Listar por data (intervalo)

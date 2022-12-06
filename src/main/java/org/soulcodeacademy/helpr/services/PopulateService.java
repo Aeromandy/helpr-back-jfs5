@@ -41,7 +41,7 @@ public class PopulateService {
         Cargo c3 = new Cargo(null, "Técnico geral", "Resolve os chamados urgentes", 12000.0);
 
         // Integer id, String nome, String email, String cpf, String senha, String foto, Cargo cargo
-        Funcionario f1 = new Funcionario(null, "Renato Pereira", "renato.pereira@gmail.com", "68258098144", encoder.encode("12345"), null, c1);
+            Funcionario f1 = new Funcionario(null, "Renato Pereira", "renato.pereira@gmail.com", "68258098144", encoder.encode("12345"), null, c1);
         f1.setPerfil(Perfil.ADMIN);
         Funcionario f2 = new Funcionario(null, "Victor Icoma", "victor.icoma@gmail.com", "51127383671", encoder.encode("12345"), null, c2);
         // Integer id, String nome, String email, String cpf, String senha, String telefone
