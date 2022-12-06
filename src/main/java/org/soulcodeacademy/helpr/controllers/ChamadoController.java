@@ -6,6 +6,7 @@ import org.soulcodeacademy.helpr.domain.enums.StatusChamado;
 import org.soulcodeacademy.helpr.services.ChamadoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -16,34 +17,39 @@ import java.util.List;
 public class ChamadoController {
     @Autowired
     private ChamadoService chamadoService;
-
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN, ROLE_FUNCIONARIO')")
     @GetMapping("/chamados")
     public List<Chamado> listarChamados() {
         return this.chamadoService.listarChamados();
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN, ROLE_FUNCIONARIO')")
     @GetMapping("/chamados/{idChamado}")
     public Chamado getChamado(@PathVariable Integer idChamado) {
         return this.chamadoService.getChamado(idChamado);
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN, ROLE_FUNCIONARIO, ROLE_CLIENTE')")
     @PostMapping("/chamados")
     public Chamado salvar(@Valid @RequestBody ChamadoDTO dto) {
         return this.chamadoService.salvar(dto);
     }
 
     @PutMapping("/chamados/{idChamado}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN, ROLE_FUNCIONARIO')")
     public Chamado atualizar(@PathVariable Integer idChamado, @Valid @RequestBody ChamadoDTO dto) {
         return this.chamadoService.atualizar(idChamado, dto);
     }
 
     // Listar por cliente
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN, ROLE_FUNCIONARIO')")
     @GetMapping("/chamados/clientes/{idCliente}")
     public List<Chamado> listarPorCliente(@PathVariable Integer idCliente) {
         return this.chamadoService.listarPorCliente(idCliente);
     }
 
     // Listar por funcionario
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN, ROLE_FUNCIONARIO')")
     @GetMapping("/chamados/funcionarios/{idFuncionario}")
     public List<Chamado> listarPorFuncionario(@PathVariable Integer idFuncionario) {
         return this.chamadoService.listarPorFuncionario(idFuncionario);
@@ -57,13 +63,15 @@ public class ChamadoController {
     }
 
     // Listar por status
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN, ROLE_FUNCIONARIO')")
     @GetMapping("/chamados/status") // /chamados/status?batata=ATRIBUIDO
-    public List<Chamado> listarPorStatus(@RequestParam StatusChamado batata) {
-        return this.chamadoService.listarPorStatus(batata);
+    public List<Chamado> listarPorStatus(@RequestParam StatusChamado status) {
+        return this.chamadoService.listarPorStatus(status);
     }
 
     // Listar por data (intervalo)
     // => /chamados/intervalo?inicio=2022-01-01&fim=2023-01-01
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN, ROLE_FUNCIONARIO')")
     @GetMapping("/chamados/intervalo")
     public List<Chamado> listarPorIntervaloDatas(
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate inicio,
@@ -71,4 +79,6 @@ public class ChamadoController {
     ) {
         return this.chamadoService.listarPorIntervaloDatas(inicio, fim);
     }
+
+
 }
