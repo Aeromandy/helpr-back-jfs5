@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
-@RestController // esta classe é capaz de captar as requisições
+@RestController
 public class FuncionarioController {
     @Autowired
     private FuncionarioService funcionarioService;
@@ -21,14 +21,14 @@ public class FuncionarioController {
         return this.funcionarioService.listar();
     }
 
-    // @RequestParam = Captura os valores de parâmetro após ?, ex: /funcionarios/salario?valor1=1000&valor2=2000
+
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_FUNCIONARIO')")
     @GetMapping("/funcionarios/salario")
     public List<Funcionario> listarPorFaixaSalarial(@RequestParam Double valor1, @RequestParam Double valor2) {
         return this.funcionarioService.listarPorFaixaSalarial(valor1, valor2);
     }
 
-    // /funcionarios/{id} (GET)
+
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_FUNCIONARIO')")
     @GetMapping("/funcionarios/{idFuncionario}")
     public Funcionario getFuncionario(@PathVariable Integer idFuncionario) {

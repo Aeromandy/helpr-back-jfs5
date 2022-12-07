@@ -16,7 +16,6 @@ public interface FuturoCandidatoRepository extends JpaRepository<FuturoCandidato
 
     Optional<FuturoCandidato>findByNome(String nome);
 
-    //List<FuturoCandidato> findByNome(String busca); // Filtrar pelo nome
 
     List<FuturoCandidato>findBySetor(Setor setor);
 }

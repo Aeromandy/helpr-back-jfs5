@@ -25,8 +25,6 @@ public class AuthService {
     private TokenUtil tokenUtil;
 
     public TokenDTO login(CredenciaisDTO dto) {
-        // Essa linha verifica se o usuário é autêntico/pertence a aplicação/possui acesso
-        // O usuário só será autenticado se passar dessa linha abaixo
         this.authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(dto.getEmail(), dto.getSenha()));
         UserDetails usuario = this.service.loadUserByUsername(dto.getEmail());
         String perfil = this.getPerfil(usuario.getAuthorities());
