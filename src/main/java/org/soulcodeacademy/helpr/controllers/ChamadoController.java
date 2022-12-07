@@ -17,19 +17,19 @@ import java.util.List;
 public class ChamadoController {
     @Autowired
     private ChamadoService chamadoService;
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN, ROLE_FUNCIONARIO')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_FUNCIONARIO')")
     @GetMapping("/chamados")
     public List<Chamado> listarChamados() {
         return this.chamadoService.listarChamados();
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN, ROLE_FUNCIONARIO')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_FUNCIONARIO')")
     @GetMapping("/chamados/{idChamado}")
     public Chamado getChamado(@PathVariable Integer idChamado) {
         return this.chamadoService.getChamado(idChamado);
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN, ROLE_FUNCIONARIO, ROLE_CLIENTE')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_FUNCIONARIO', 'ROLE_CLIENTE')")
     @PostMapping("/chamados")
     public Chamado salvar(@Valid @RequestBody ChamadoDTO dto) {
         return this.chamadoService.salvar(dto);
@@ -42,14 +42,14 @@ public class ChamadoController {
     }
 
     // Listar por cliente
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN, ROLE_FUNCIONARIO')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_FUNCIONARIO')")
     @GetMapping("/chamados/clientes/{idCliente}")
     public List<Chamado> listarPorCliente(@PathVariable Integer idCliente) {
         return this.chamadoService.listarPorCliente(idCliente);
     }
 
     // Listar por funcionario
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN, ROLE_FUNCIONARIO')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_FUNCIONARIO')")
     @GetMapping("/chamados/funcionarios/{idFuncionario}")
     public List<Chamado> listarPorFuncionario(@PathVariable Integer idFuncionario) {
         return this.chamadoService.listarPorFuncionario(idFuncionario);
@@ -63,7 +63,7 @@ public class ChamadoController {
     }
 
     // Listar por status
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN, ROLE_FUNCIONARIO')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_FUNCIONARIO')")
     @GetMapping("/chamados/status") // /chamados/status?batata=ATRIBUIDO
     public List<Chamado> listarPorStatus(@RequestParam StatusChamado status) {
         return this.chamadoService.listarPorStatus(status);
@@ -71,7 +71,7 @@ public class ChamadoController {
 
     // Listar por data (intervalo)
     // => /chamados/intervalo?inicio=2022-01-01&fim=2023-01-01
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN, ROLE_FUNCIONARIO')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_FUNCIONARIO')")
     @GetMapping("/chamados/intervalo")
     public List<Chamado> listarPorIntervaloDatas(
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate inicio,

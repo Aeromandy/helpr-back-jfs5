@@ -15,27 +15,27 @@ public class FuncionarioController {
     @Autowired
     private FuncionarioService funcionarioService;
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN, ROLE_FUNCIONARIO')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_FUNCIONARIO')")
     @GetMapping("/funcionarios")
     public List<Funcionario> listar() {
         return this.funcionarioService.listar();
     }
 
     // @RequestParam = Captura os valores de parâmetro após ?, ex: /funcionarios/salario?valor1=1000&valor2=2000
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN, ROLE_FUNCIONARIO')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_FUNCIONARIO')")
     @GetMapping("/funcionarios/salario")
     public List<Funcionario> listarPorFaixaSalarial(@RequestParam Double valor1, @RequestParam Double valor2) {
         return this.funcionarioService.listarPorFaixaSalarial(valor1, valor2);
     }
 
     // /funcionarios/{id} (GET)
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN, ROLE_FUNCIONARIO')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_FUNCIONARIO')")
     @GetMapping("/funcionarios/{idFuncionario}")
     public Funcionario getFuncionario(@PathVariable Integer idFuncionario) {
         return this.funcionarioService.getFuncionario(idFuncionario);
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN, ROLE_FUNCIONARIO')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_FUNCIONARIO')")
     @PostMapping("/funcionarios")
     public Funcionario salvar(@Valid @RequestBody FuncionarioDTO dto) {
         Funcionario funcionario = this.funcionarioService.salvar(dto);
