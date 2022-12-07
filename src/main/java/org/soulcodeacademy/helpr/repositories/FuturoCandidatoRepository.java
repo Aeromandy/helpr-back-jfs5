@@ -1,6 +1,4 @@
 package org.soulcodeacademy.helpr.repositories;
-import org.soulcodeacademy.helpr.domain.Cargo;
-import org.soulcodeacademy.helpr.domain.Funcionario;
 import org.soulcodeacademy.helpr.domain.FuturoCandidato;
 import org.soulcodeacademy.helpr.domain.Usuario;
 import org.soulcodeacademy.helpr.domain.enums.Setor;
@@ -14,7 +12,7 @@ import java.util.Optional;
 @Repository
 public interface FuturoCandidatoRepository extends JpaRepository<FuturoCandidato, Integer> {
 
-    Optional<FuturoCandidato> findByEmail(String email);
+    Optional<FuturoCandidato>findByEmail(String email);
 
     Optional<FuturoCandidato>findByNome(String nome);
 
