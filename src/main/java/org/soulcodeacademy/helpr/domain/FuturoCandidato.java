@@ -1,6 +1,12 @@
 package org.soulcodeacademy.helpr.domain;
 
+import com.fasterxml.jackson.annotation.JsonEnumDefaultValue;
+import org.soulcodeacademy.helpr.domain.enums.Setor;
+import org.soulcodeacademy.helpr.domain.enums.StatusChamado;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class FuturoCandidato {
@@ -17,16 +23,20 @@ public class FuturoCandidato {
     @Column(nullable = false, length = 250)
     private String descricao;
 
-    private String setor;
+
+    @Enumerated(EnumType.STRING)
+    private Setor setor = Setor.Manutenção;
+
 
     public FuturoCandidato() {}
 
-    public FuturoCandidato(Integer idFtcandidato, String nome, String email, String descricao, String setor) {
+    public FuturoCandidato(Integer idFtcandidato, String nome, String email, String descricao, Setor setor) {
         this.idFtcandidato = idFtcandidato;
         this.nome = nome;
         this.email = email;
         this.descricao = descricao;
-        this.setor = setor;
+        this.setor= setor;
+
     }
 
     public Integer getIdFtcandidato() {
@@ -61,11 +71,11 @@ public class FuturoCandidato {
         this.descricao = descricao;
     }
 
-    public String getSetor() {
+    public Setor getSetor() {
         return setor;
     }
 
-    public void setSetor(String setor) {
+    public void setSetor(Setor setor) {
         this.setor = setor;
     }
 }

@@ -25,11 +25,11 @@ public class FuturoCandidatoService {
         return this.futuroCandidatoRepository.findBySetor(setor);
     }
 
-    public List<FuturoCandidato>findByEmail(String email) {
+    public Optional<FuturoCandidato> findByEmail(String email) {
         return this.futuroCandidatoRepository.findByEmail(email);
     }
 
-    public List<FuturoCandidato>findByNome(String nome) {
+    public Optional<FuturoCandidato> findByNome(String nome) {
         return this.futuroCandidatoRepository.findByNome(nome);
     }
 

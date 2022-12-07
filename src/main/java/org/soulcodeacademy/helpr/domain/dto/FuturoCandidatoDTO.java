@@ -1,5 +1,7 @@
 package org.soulcodeacademy.helpr.domain.dto;
 
+import org.soulcodeacademy.helpr.domain.enums.Setor;
+
 import javax.persistence.Column;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -18,7 +20,7 @@ public class FuturoCandidatoDTO {
     private String descricao;
 
     @NotNull(message = "Campo setor é obrigatório")
-    private String setor;
+    private Setor setor;
 
     public String getNome() {
         return nome;
@@ -44,11 +46,11 @@ public class FuturoCandidatoDTO {
         this.descricao = descricao;
     }
 
-    public String getSetor() {
+    public Setor getSetor() {
         return setor;
     }
 
-    public void setSetor(String setor) {
+    public void setSetor(Setor setor) {
         this.setor = setor;
     }
 }
