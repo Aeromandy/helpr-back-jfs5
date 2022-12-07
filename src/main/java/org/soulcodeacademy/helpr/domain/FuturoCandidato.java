@@ -1,12 +1,7 @@
 package org.soulcodeacademy.helpr.domain;
-
-import com.fasterxml.jackson.annotation.JsonEnumDefaultValue;
 import org.soulcodeacademy.helpr.domain.enums.Setor;
-import org.soulcodeacademy.helpr.domain.enums.StatusChamado;
-
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+
 
 @Entity
 public class FuturoCandidato {

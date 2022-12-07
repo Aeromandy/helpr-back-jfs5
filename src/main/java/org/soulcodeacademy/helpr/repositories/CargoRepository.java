@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository // indica que a interface é um repository
+@Repository
 public interface CargoRepository extends JpaRepository<Cargo, Integer> { // <Entidade, PK>
     List<Cargo> findByNome(String valor); // WHERE nome = valor
     List<Cargo> findBySalario(Double valor); // WHERE salario = valor
@@ -17,9 +17,3 @@ public interface CargoRepository extends JpaRepository<Cargo, Integer> { // <Ent
     List<Cargo> findBySalarioBetween(Double valor1, Double valor2); // WHERE salario BETWEEN valor1 AND valor2
 }
 
-// Repository = é um recurso que permite manipular a entidade no banco de dados
-// Adicionar entidades, atualizar entidades, remover entidades e listar (CRUD)
-// Indicar qual a entidade vai ser gerenciada pelo repository e qual o tipo da PK.
-// Obs: O Spring gera uma classe dinâmica com base em nossa interface CargoRepository
-// CrudRepository = contém as operações básicas de um banco de dados
-// JpaRepository = possui mais funcionalidades p/ tratar a entidade

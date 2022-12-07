@@ -28,7 +28,7 @@ public class FuncionarioService {
     }
 
     public Funcionario getFuncionario(Integer idFuncionario) {
-        // Optional = pode existir ou não a entidade
+
         Optional<Funcionario> funcionario = this.funcionarioRepository.findById(idFuncionario);
 
         if (funcionario.isEmpty()) {
@@ -40,8 +40,8 @@ public class FuncionarioService {
 
     public Funcionario salvar(FuncionarioDTO dto) {
         Cargo cargo = this.cargoService.getCargo(dto.getIdCargo()); // verifica se o cargo existe mesmo
-        // id, nome, email,cpf, String senha, foto, cargo
-        // Transferindo informações do DTO para nossa entidade
+
+
         Funcionario funcionario = new Funcionario(null, dto.getNome(), dto.getEmail(), dto.getCpf(), dto.getSenha(), dto.getFoto(), cargo);
         Funcionario salvo = this.funcionarioRepository.save(funcionario);
 
@@ -49,9 +49,9 @@ public class FuncionarioService {
     }
 
     public Funcionario atualizar(Integer idFuncionario, FuncionarioDTO dto) {
-        // Busca o funcionario com o idFuncionario
+
         Funcionario funcionarioAtual = this.getFuncionario(idFuncionario);
-        // Busca os dados do cargo a ser alterado
+
         Cargo cargo = this.cargoService.getCargo(dto.getIdCargo());
 
         funcionarioAtual.setNome(dto.getNome());

@@ -41,36 +41,32 @@ public class ChamadoController {
         return this.chamadoService.atualizar(idChamado, dto);
     }
 
-    // Listar por cliente
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_FUNCIONARIO')")
     @GetMapping("/chamados/clientes/{idCliente}")
     public List<Chamado> listarPorCliente(@PathVariable Integer idCliente) {
         return this.chamadoService.listarPorCliente(idCliente);
     }
 
-    // Listar por funcionario
+
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_FUNCIONARIO')")
     @GetMapping("/chamados/funcionarios/{idFuncionario}")
     public List<Chamado> listarPorFuncionario(@PathVariable Integer idFuncionario) {
         return this.chamadoService.listarPorFuncionario(idFuncionario);
     }
 
-    // Calculadora
-    // /soma?numero1=200&numero2=500 ====> 700
     @GetMapping("/soma")
     public Integer soma(@RequestParam Integer numero1, @RequestParam Integer numero2) {
         return numero1 + numero2;
     }
 
-    // Listar por status
+
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_FUNCIONARIO')")
     @GetMapping("/chamados/status") // /chamados/status?batata=ATRIBUIDO
     public List<Chamado> listarPorStatus(@RequestParam StatusChamado status) {
         return this.chamadoService.listarPorStatus(status);
     }
 
-    // Listar por data (intervalo)
-    // => /chamados/intervalo?inicio=2022-01-01&fim=2023-01-01
+
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_FUNCIONARIO')")
     @GetMapping("/chamados/intervalo")
     public List<Chamado> listarPorIntervaloDatas(
