@@ -25,7 +25,7 @@ public class Dependente {
 
     public Dependente() {}
 
-    public Dependente(Integer idDependente, String nome, String cpf, LocalDate dataNascimento, String escolaridade, Funcionario funcionario) {
+    public Dependente(Integer idDependente, String nome, String cpf, LocalDate dataNascimento, String escolaridade, org.soulcodeacademy.helpr.domain.Funcionario funcionario) {
         this.idDependente = idDependente;
         this.nome = nome;
         this.cpf = cpf;
