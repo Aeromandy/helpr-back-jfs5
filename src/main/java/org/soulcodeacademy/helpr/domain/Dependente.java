@@ -81,4 +81,7 @@ public class Dependente {
     public void setFuncionario(Funcionario funcionario) {
         this.funcionario = funcionario;
     }
+
+    public void setResponsavel(Funcionario responsavel) {
+    }
 }

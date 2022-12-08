@@ -1,19 +1,19 @@
 package org.soulcodeacademy.helpr.services;
 
-import org.soulcodeacademy.helpr.domain.Cargo;
-import org.soulcodeacademy.helpr.domain.Chamado;
-import org.soulcodeacademy.helpr.domain.Cliente;
-import org.soulcodeacademy.helpr.domain.Funcionario;
+import org.soulcodeacademy.helpr.domain.*;
 import org.soulcodeacademy.helpr.domain.enums.Perfil;
 import org.soulcodeacademy.helpr.domain.enums.StatusChamado;
 import org.soulcodeacademy.helpr.repositories.CargoRepository;
 import org.soulcodeacademy.helpr.repositories.ChamadoRepository;
 import org.soulcodeacademy.helpr.repositories.ClienteRepository;
 import org.soulcodeacademy.helpr.repositories.FuncionarioRepository;
+import org.soulcodeacademy.helpr.repositories.DependenteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+
+import java.time.LocalDate;
 import java.util.List;
 
 // Torna o objeto de PopulateService disponível para toda a aplicação (global)
@@ -32,6 +32,9 @@ public class PopulateService {
     private ChamadoRepository chamadoRepository;
 
     @Autowired
+    private DependenteRepository dependenteRepository;
+
+    @Autowired
     private PasswordEncoder encoder;
 
     public void populate() {
@@ -41,7 +44,7 @@ public class PopulateService {
         Cargo c3 = new Cargo(null, "Técnico geral", "Resolve os chamados urgentes", 12000.0);
 
         // Integer id, String nome, String email, String cpf, String senha, String foto, Cargo cargo
-            Funcionario f1 = new Funcionario(null, "Renato Pereira", "renato.pereira@gmail.com", "68258098144", encoder.encode("12345"), null, c1);
+        Funcionario f1 = new Funcionario(null, "Renato Pereira", "renato.pereira@gmail.com", "68258098144", encoder.encode("12345"), null, c1);
         f1.setPerfil(Perfil.ADMIN);
         Funcionario f2 = new Funcionario(null, "Victor Icoma", "victor.icoma@gmail.com", "51127383671", encoder.encode("12345"), null, c2);
         // Integer id, String nome, String email, String cpf, String senha, String telefone
@@ -56,11 +59,27 @@ public class PopulateService {
         ch2.setFuncionario(f1);
         ch2.setStatus(StatusChamado.ATRIBUIDO);
 
+        Dependente dp1 = new Dependente(null, "Jade Barbosa", "01791218393", LocalDate.of(2017,01,01), "Pré-Escola", f1);
+        dp1.setResponsavel(f1);
+
+        Dependente dp2 = new Dependente(null, "Raphaela Barbosa", "76004316377", LocalDate.of(2006,01,01), "Pré Escola", f1);
+        dp2.setResponsavel(f1);
+
+        Dependente dp3 = new Dependente(null, "Priscila", "52597716210", LocalDate.of(2008,01,01), "Ensino Médio", f2);
+        dp3.setResponsavel(f2);
+
+        Dependente dp4 = new Dependente(null, "Ana Thereza", "01571268030", LocalDate.of(2005,01,01), "Ensino Médio", f2);
+        dp3.setResponsavel(f2);
+
+
+
         // vamos persistir as entidades = salvar no banco
         this.cargoRepository.saveAll(List.of(c1, c2, c3));
         this.funcionarioRepository.saveAll(List.of(f1, f2));
         this.clienteRepository.saveAll(List.of(cl1, cl2));
         this.chamadoRepository.saveAll(List.of(ch1, ch2));
+
+        this.dependenteRepository.saveAll(List.of(dp1, dp2, dp3, dp4));
     }
 }
 

@@ -11,9 +11,10 @@ import java.util.List;
 
 @Repository
 public interface DependenteRepository extends JpaRepository<Dependente, Integer> {
-    List<Dependente>findByCpf(String cpf);
+    List<Dependente>findByCpf(List<Dependente> cpf);
     List<Dependente>findByEscolaridade(String escolaridade);
     List<Dependente>findByFuncionario(Funcionario funcionario);
+    List<Dependente> findByNome(String nome);
 
     @Query(value = "SELECT * FROM dependente WHERE data_nascimento BETWEEN :data1 AND :data2", nativeQuery = true)
     List<Dependente> buscarEntreDatas(LocalDate data1, LocalDate data2);
