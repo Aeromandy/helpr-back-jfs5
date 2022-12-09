@@ -32,6 +32,9 @@ public class PopulateService {
     @Autowired
     private FuturoCandidatoRepository FuturoCandidatoRepository;
 
+    @Autowired
+    private FuturoClienteRepository futuroClienteRepository;
+
     public void populate() {
 
         Cargo c1 = new Cargo(null, "Diretor Geral", "Gerencia a empresa", 30000.0);
@@ -56,6 +59,8 @@ public class PopulateService {
 
         FuturoCandidato ft1 = new FuturoCandidato(null,"teste","teste@gmail.com","teste",Setor.Desenvolvimento);
 
+        FuturoCliente ftcl1 = new FuturoCliente(null, "Bruno Dias", "bruno@mail.com","34323629001");
+
 
 
         this.cargoRepository.saveAll(List.of(c1, c2, c3));
@@ -63,6 +68,7 @@ public class PopulateService {
         this.clienteRepository.saveAll(List.of(cl1, cl2));
         this.chamadoRepository.saveAll(List.of(ch1, ch2));
         this.FuturoCandidatoRepository.save(ft1);
+        this.futuroClienteRepository.save(ftcl1);
     }
 
 }
