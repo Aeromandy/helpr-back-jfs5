@@ -15,6 +15,10 @@ public interface DependenteRepository extends JpaRepository<Dependente, Integer>
     List<Dependente>findByEscolaridade(String escolaridade);
     List<Dependente>findByFuncionario(Funcionario funcionario);
 
+    @Query(value = "SELECT * FROM dependentes WHERE funcionarios IN idFuncionario", nativeQuery = true)
+    List<Dependente>findByDependentesPorFuncionario(Dependente idFuncionario);
+
+
     @Query(value = "SELECT * FROM dependente WHERE data_nascimento BETWEEN :data1 AND :data2", nativeQuery = true)
     List<Dependente> buscarEntreDatas(LocalDate data1, LocalDate data2);
 
