@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 // Torna o objeto de PopulateService disponível para toda a aplicação (global)
@@ -33,6 +34,9 @@ public class PopulateService {
     private FuturoCandidatoRepository FuturoCandidatoRepository;
 
     @Autowired
+
+    private DependenteRepository dependenteRepository;
+    
     private FuturoClienteRepository futuroClienteRepository;
 
     public void populate() {
@@ -59,8 +63,12 @@ public class PopulateService {
 
         FuturoCandidato ft1 = new FuturoCandidato(null,"teste","teste@gmail.com","teste",Setor.Desenvolvimento);
 
+        Dependente dp1 = new Dependente(null, "Fabricia", "22523023806", LocalDate.of(2015,01,01),"Ensino Fundamental",f1);
+        Dependente dp2 = new Dependente(null, "Rosa", "39066174595", LocalDate.of(2018,01,01),"Pré-Escola",f1);
+        Dependente dp3 = new Dependente(null, "Betânia", "71274884608", LocalDate.of(2014,01,01),"Ensino Médio",f2);
+        Dependente dp4 = new Dependente(null, "Brian", "26112655349", LocalDate.of(2005, 05,03),"Ensino Médio", f2);
+        
         FuturoCliente ftcl1 = new FuturoCliente(null, "Bruno Dias", "bruno@mail.com","34323629001");
-
 
 
         this.cargoRepository.saveAll(List.of(c1, c2, c3));
@@ -68,6 +76,9 @@ public class PopulateService {
         this.clienteRepository.saveAll(List.of(cl1, cl2));
         this.chamadoRepository.saveAll(List.of(ch1, ch2));
         this.FuturoCandidatoRepository.save(ft1);
+
+        this.dependenteRepository.saveAll(List.of(dp1, dp2, dp3, dp4));
+        
         this.futuroClienteRepository.save(ftcl1);
     }
 

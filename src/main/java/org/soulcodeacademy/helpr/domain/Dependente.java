@@ -1,7 +1,10 @@
 package org.soulcodeacademy.helpr.domain;
 
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Entity
@@ -15,21 +18,22 @@ public class Dependente {
 
     private String cpf;
 
-    private LocalDate dataNascimento;
+    private LocalDate data_nascimento;
 
     private String escolaridade;
 
     @ManyToOne
+    @NotNull
     @JoinColumn(name = "id_funcionario")
     private Funcionario funcionario;
 
     public Dependente() {}
 
-    public Dependente(Integer idDependente, String nome, String cpf, LocalDate dataNascimento, String escolaridade, Funcionario funcionario) {
+    public Dependente(Integer idDependente, String nome, String cpf, LocalDate data_nascimento, String escolaridade, Funcionario funcionario) {
         this.idDependente = idDependente;
         this.nome = nome;
         this.cpf = cpf;
-        this.dataNascimento = dataNascimento;
+        this.data_nascimento = data_nascimento;
         this.escolaridade = escolaridade;
         this.funcionario = funcionario;
     }
@@ -58,12 +62,12 @@ public class Dependente {
         this.cpf = cpf;
     }
 
-    public LocalDate getDataNascimento() {
-        return dataNascimento;
+    public LocalDate getData_nascimento() {
+        return data_nascimento;
     }
 
-    public void setDataNascimento(LocalDate dataNascimento) {
-        this.dataNascimento = dataNascimento;
+    public void setData_nascimento(LocalDate data_nascimento) {
+        this.data_nascimento = data_nascimento;
     }
 
     public String getEscolaridade() {
