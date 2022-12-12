@@ -34,9 +34,9 @@ public class PopulateService {
     private FuturoCandidatoRepository FuturoCandidatoRepository;
 
     @Autowired
-
     private DependenteRepository dependenteRepository;
-    
+
+    @Autowired
     private FuturoClienteRepository futuroClienteRepository;
 
     public void populate() {
