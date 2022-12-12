@@ -7,10 +7,14 @@ import org.soulcodeacademy.helpr.domain.dto.DependenteDTO;
 import org.soulcodeacademy.helpr.repositories.DependenteRepository;
 import org.soulcodeacademy.helpr.services.errors.RecursoNaoEncontradoError;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import java.time.LocalDate;
 import java.time.Month;
+import java.time.Period;
 import java.time.Year;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
@@ -29,30 +33,17 @@ public class DependenteService {
 
     public List<Dependente> listar() { return this.dependenteRepository.findAll(); }
 
-    public Dependente listarPorCpf(String cpf) {
-        List<Dependente> dependente = this.dependenteRepository.findByCpf(cpf);
-        if (cpf.isEmpty()) {
-            throw new RecursoNaoEncontradoError("O CPF não foi encontrado!");
-        } else {
-            return listarPorCpf(cpf);
+    public List<Dependente> listarPorCpf(String cpf) {
+
+            return this.dependenteRepository.findByCpf(cpf);
         }
+
+    public List<Dependente> buscarEntreDatas(LocalDate data1, LocalDate data2) {
+        return this.dependenteRepository.buscarEntreDatas(data1, data2);
     }
 
-    public Dependente buscarEntreDatas(LocalDate data1, LocalDate data2) {
-        List<Dependente> dependente = this.dependenteRepository.buscarEntreDatas(data1, data2);
-        if (data1 == null) {
-            throw new RecursoNaoEncontradoError("As primeira data não foram foi encontradas!");
-        } else if (data2 == null){
-            throw new RecursoNaoEncontradoError("As segunda data não foram foi encontradas!");
-        }else {
-            return buscarEntreDatas(data1, data2);
-        }
-    }
-
-    public Dependente findByDependentesPorFuncionario(Integer idFuncionario) {
-        List<Dependente> dependentes = this.dependenteRepository.findByDependentesPorFuncionario(getDependente(idFuncionario));
-
-        return dependentes.get(idFuncionario);
+    public List<Dependente> findDependentesByIdFuncionario(Integer idFuncionario) {
+        return this.dependenteRepository.findDependentesByIdFuncionario(idFuncionario);
     }
 
     public Dependente getDependente(Integer idDependente) {
@@ -90,7 +81,7 @@ public class DependenteService {
         Funcionario responsavel = this.funcionarioService.getFuncionario(dto.getIdFuncionario());
         dependenteAtual.setNome(dto.getNome());
         dependenteAtual.setCpf(dto.getCpf());
-        dependenteAtual.setDataNascimento(dto.getDataNascimento());
+        dependenteAtual.setData_nascimento(dto.getDataNascimento());
         dependenteAtual.setEscolaridade(dto.getEscolaridade());
 
 
